@@ -16,7 +16,7 @@ class Ros < Formula
   #   | sort -u | pbcopy
   depends_on "boost"
   depends_on "boost-python"
-  depends_on "cmake"
+  depends_on "cmake" => :run
   depends_on "console_bridge"
   depends_on "cppunit"
   depends_on "eigen"
@@ -30,7 +30,7 @@ class Ros < Formula
   depends_on "log4cxx"
   depends_on "lz4"
   depends_on "ossp-uuid"
-  depends_on "pkg-config"
+  depends_on "pkg-config" => :run
   depends_on "poco"
   depends_on "protobuf"
   depends_on "py2cairo"
@@ -129,7 +129,7 @@ class Ros < Formula
   def install
     Dir.glob("**/*.pc").concat(Dir.glob("**/*.cmake").concat(Dir.glob("**/*.sh"))).each do |f|
       begin
-        inreplace f, "/usr/local/Cellar/ros/kinetic-lagrange-1", "#{prefix}" if File.file?(f)
+        inreplace f, "/usr/local/Cellar/ros/kinetic-lagrange-1", prefix if File.file?(f)
       rescue Utils::InreplaceError
         # meh
       end
