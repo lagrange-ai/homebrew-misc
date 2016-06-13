@@ -1,9 +1,9 @@
 class Ros < Formula
   desc "ros kinetic"
   homepage "http://ros.org"
-  url "https://github.com/lagrange-ai/homebrew-ros"
-  version "kinetic-lagrange-test-1"
-  #sha256 "yolo"
+  url "https://github.com/lagrange-ai/homebrew-ros/releases/download/osx-kinetic-1/osx-ros-kinetic-lagrange-1.tar.gz"
+  version "kinetic-1"
+  sha256 "8c6cea51fb4228c818c56dc07a5a140e5e475c77e36c804157bed33ab740f9c9"
 
   bottle :unneeded
   keg_only "This brew is to be activated manually."
@@ -41,13 +41,17 @@ class Ros < Formula
   # special homebrewed versions of python deps
   depends_on "pillow" => [:python, "PIL"]
   depends_on "numpy" => :python
-  depends_on "homebrew/python/matplotlib" => [:python, "with-pyqt5"]
+  #depends_on "homebrew/python/matplotlib" => [:python, "with-pyqt5"]
 
   # based on:
   # rosdep  keys --from-paths src | rosdep resolve \
   #   | awk -F: '$3 == "homebrew" {print "depends_on", "\""$2"\""}' \
   #   | sort -u | pbcopy
   # (using homebrew-pypi-poet to generate resources)
+  resource "matplotlib" do
+    url "https://files.pythonhosted.org/packages/02/16/f3c3867c806791bba5329bd5db80b76d08d5c6bc2cd1136be47dfd5577a0/matplotlib-2.0.0b1.tar.gz"
+    sha256 "d8b261a796bdc229af2140b3dec452b4aa2fb8388196036d9b18db9f42031659"
+  end
   resource "PyYAML" do
     url "https://files.pythonhosted.org/packages/75/5e/b84feba55e20f8da46ead76f14a3943c8cb722d40360702b2365b91dec00/PyYAML-3.11.tar.gz"
     sha256 "c36c938a872e5ff494938b33b14aaa156cb439ec67548fcab3535bb78b0846e8"
@@ -123,14 +127,18 @@ class Ros < Formula
   end
 
   def install
-    Dir["**/*"].each do |f|
-      inreplace f, "/usr/local/Cellar/ros/kinetic-lagrange-1", "#{prefix}"
+    Dir.glob("**/*.pc").concat(Dir.glob("**/*.cmake").concat(Dir.glob("**/*.sh"))).each do |f|
+      begin
+        inreplace f, "/usr/local/Cellar/ros/kinetic-lagrange-1", "#{prefix}" if File.file?(f)
+      rescue Utils::InreplaceError
+        # meh
+      end
     end
+    prefix.install Dir["*"]
     resources.each do |r|
       r.stage do
         system "python", *Language::Python.setup_install_args(prefix)
       end
     end
-    prefix.install Dir["*"]
   end
 end
