@@ -1,5 +1,5 @@
 class Ros < Formula
-  desc "ros kinetic"
+  desc "ros kinetic umbrella"
   homepage "http://ros.org"
   url "https://github.com/lagrange-ai/homebrew-ros/releases/download/osx-kinetic-1/osx-ros-kinetic-lagrange-1.tar.gz"
   version "kinetic-1"
@@ -17,12 +17,12 @@ class Ros < Formula
   depends_on "boost"
   depends_on "boost-python"
   depends_on "cmake" => :run
-  depends_on "console_bridge"
+  depends_on "ros/deps/console_bridge"
   depends_on "cppunit"
   depends_on "eigen"
   depends_on "ffmpeg"
   depends_on "graphviz"
-  depends_on "gtest"
+  depends_on "ros/deps/gtest"
   depends_on "jasper"
   depends_on "jpeg"
   depends_on "libpng"
@@ -31,11 +31,11 @@ class Ros < Formula
   depends_on "lz4"
   depends_on "ossp-uuid"
   depends_on "pkg-config" => :run
-  depends_on "poco"
+  depends_on "https://raw.githubusercontent.com/Homebrew/homebrew-core/b6180131029e13c2dde1de1be6d3cf78178db3d8/Formula/poco.rb"
   depends_on "protobuf"
   depends_on "py2cairo"
   depends_on "sip"
-  depends_on "tango-icon-theme"
+  depends_on "ros/deps/tango-icon-theme"
   depends_on "tinyxml"
 
   # special homebrewed versions of python deps
