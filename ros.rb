@@ -39,8 +39,8 @@ class Ros < Formula
   depends_on "tinyxml"
 
   # special homebrewed versions of python deps
-  depends_on "pillow" => [:python, "PIL"]
-  depends_on "numpy" => :python
+  depends_on "homebrew/python/pillow" => [:python, "PIL"]
+  depends_on "homebrew/python/numpy" => :python
   #depends_on "homebrew/python/matplotlib" => [:python, "with-pyqt5"]
 
   # based on:
