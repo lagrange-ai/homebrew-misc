@@ -8,7 +8,8 @@ class Ros < Formula
   bottle :unneeded
   keg_only "This brew is to be activated manually."
 
-  depends_on :python # this probably means we want python2
+  depends_on :python
+  depends_on :python3
 
   # based on:
   # rosdep  keys --from-paths src | rosdep resolve \
@@ -34,14 +35,13 @@ class Ros < Formula
   depends_on "https://raw.githubusercontent.com/Homebrew/homebrew-core/b6180131029e13c2dde1de1be6d3cf78178db3d8/Formula/poco.rb"
   depends_on "protobuf"
   depends_on "py2cairo"
-  depends_on "sip" => ["without-python3"]
   depends_on "pyqt5" => ["with-python", "without-python3"]
   depends_on "ros/deps/tango-icon-theme"
   depends_on "tinyxml"
 
   # special homebrewed versions of python deps
-  depends_on "homebrew/python/pillow" => [:python, "PIL"]
-  depends_on "homebrew/python/numpy" => :python
+  depends_on "homebrew/python/pillow"
+  depends_on "homebrew/python/numpy"
   #depends_on "homebrew/python/matplotlib" => [:python, "with-pyqt5"]
 
   # based on:
