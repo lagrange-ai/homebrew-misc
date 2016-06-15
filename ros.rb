@@ -122,7 +122,7 @@ class Ros < Formula
     I may have done this:
       ln -sf /usr/local/share/sip/Qt5 /usr/local/share/sip/PyQt5
 
-    To activate this ROS install do:
+    To activate this ROS install add the following line to your .bashrc or equivalent:
       source #{prefix}/setup.bash
     EOS
   end
