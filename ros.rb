@@ -34,7 +34,7 @@ class Ros < Formula
   depends_on "https://raw.githubusercontent.com/Homebrew/homebrew-core/b6180131029e13c2dde1de1be6d3cf78178db3d8/Formula/poco.rb"
   depends_on "protobuf"
   depends_on "py2cairo"
-  depends_on "sip"
+  depends_on "sip" => ["without-python3"]
   depends_on "ros/deps/tango-icon-theme"
   depends_on "tinyxml"
 
